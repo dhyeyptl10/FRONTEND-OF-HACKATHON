@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLAIMChain - Expense Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .header-gradient {
+            background: linear-gradient(90deg, #be67f8, #3121a8);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg,#be67f8 , #3121a8);
+        }
+        .btn-secondary {
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+        }
+        .sidebar-icon {
+            transition: all 0.2s ease-in-out;
+        }
+        .sidebar-icon:hover {
+            transform: scale(1.1);
+            background-color: #e9d5ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Main Header -->
+    <header id="main-header" class="header-gradient text-white p-4 shadow-md hidden">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wider cursor-pointer" data-page="home-page">CLAIMChain</h1>
+            <nav class="hidden md:flex items-center space-x-4">
+                <a href="#" class="hover:text-gray-300 px-3 py-2 rounded-md" data-page="support-page">Support</a>
+                <span class="text-gray-400">|</span>
+                <a href="#" class="hover:text-gray-300 px-3 py-2 rounded-md" data-page="about-page">About Us</a>
+                <span class="text-gray-400">|</span>
+                <a href="#" class="hover:text-gray-300 px-3 py-2 rounded-md" data-page="contact-page">Contact</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden mt-3">
+             <a href="#" class="block hover:text-gray-300 px-3 py-2 rounded-md" data-page="support-page">Support</a>
+             <a href="#" class="block hover:text-gray-300 px-3 py-2 rounded-md" data-page="about-page">About Us</a>
+             <a href="#" class="block hover:text-gray-300 px-3 py-2 rounded-md" data-page="contact-page">Contact</a>
+        </div>
+    </header>
+
+    <!-- Login/Signup Header -->
+    <header id="auth-header" class="header-gradient text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wider">CLAIMChain</h1>
+            <nav class="hidden md:flex items-center space-x-4">
+                <a href="#" class="hover:text-gray-300 px-3 py-2 rounded-md" data-page="about-page">About Us</a>
+                <span class="text-gray-400">|</span>
+                <a href="#" class="hover:text-gray-300 px-3 py-2 rounded-md" data-page="contact-page">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Login Page -->
+        <section id="login-page" class="page active">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="w-full max-w-md mx-auto">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Login</h2>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg">
+                        <form>
+                            <div class="mb-4">
+                                <input type="text" placeholder="Username" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400">
+                            </div>
+                            <div class="mb-6">
+                                <input type="password" placeholder="Password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400">
+                            </div>
+                            <button type="button" class="w-full btn-primary text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity" data-page="home-page" style="background-color: linear-gradient(90deg, #be67f8, #3121a8);">Login</button>
+                            <p class="text-center text-sm text-gray-500 mt-4">
+                                Forgot Password? <a href="#" class="text-purple-600 hover:underline">Click here</a>
+                            </p>
+                            <p class="text-center text-sm text-gray-500 mt-2">
+                                No account? <a href="#" class="text-purple-600 hover:underline" data-page="signup-page">Sign Up</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+                <div class="space-y-8 hidden md:block">
+                    <div class="flex items-center gap-6">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-purple-700 mb-2">CLAIMChain</h3>
+                            <p class="text-gray-600">Our Expense Cards enable you to control your expenses with our easy to use free card. Empowering your employees and allowing you to focus on growing your business, not managing your expenses.</p>
+                            <button class="mt-4 px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700">Find out more</button>
+                        </div>
+                        <img src="https://res.cloudinary.com/dsrczav6p/image/upload/v1759559847/OIP_pxrw38.webp" class="rounded-full w-36 h-36 object-cover shadow-lg">
+                    </div>
+                     <div class="flex items-center gap-6">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-purple-700 mb-2">Mobile Access</h3>
+                            <p class="text-gray-600">Manage expenses on the go with our intuitive mobile app. Track spending, approve claims, and stay in control of your finances from anywhere, at any time.</p>
+                             <button class="mt-4 px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700">Find out more</button>
+                        </div>
+                         <img src="https://res.cloudinary.com/dsrczav6p/image/upload/v1759559919/login-mobile-ui_gcnxcx.png" class="rounded-lg w-36 h-36 object-cover shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Signup Page -->
+        <section id="signup-page" class="page">
+             <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">Sign Up</h2>
+             <div class="grid md:grid-cols-2 gap-10 items-center max-w-5xl mx-auto">
+                <div class="hidden md:block">
+                    <img src="https://res.cloudinary.com/dsrczav6p/image/upload/v1759572477/OIP.-dP2u8owXSjqBFrXMSIEowHaE8_cmpvt3.webp" class="rounded-2xl shadow-xl w-full h-auto object-cover">
+                </div>
+                 <div class="w-full">
+                     <form class="space-y-6">
+                         <div>
+                             <label for="fullName" class="text-sm font-medium text-gray-700">Full Name</label>
+                             <input type="text" id="fullName" class="mt-1 w-full border-b-2 border-gray-300 focus:outline-none focus:border-purple-500 py-2">
+                         </div>
+                         <div>
+                             <label for="email" class="text-sm font-medium text-gray-700">E-mail</label>
+                             <input type="email" id="email" class="mt-1 w-full border-b-2 border-gray-300 focus:outline-none focus:border-purple-500 py-2">
+                         </div>
+                         <div>
+                             <label for="password" class="text-sm font-medium text-gray-700">Password</label>
+                             <input type="password" id="password" class="mt-1 w-full border-b-2 border-gray-300 focus:outline-none focus:border-purple-500 py-2">
+                         </div>
+                         <button type="button" class="w-full bg-blue-800 text-white font-bold py-3 px-4 rounded-full hover:bg-blue-900 transition-colors text-lg" data-page="home-page">Sign up</button>
+                          <p class="text-center text-sm text-gray-500 mt-4">
+                                Already have an account? <a href="#" class="text-purple-600 hover:underline" data-page="login-page">Login</a>
+                            </p>
+                     </form>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Home Page (Dashboard Selection) -->
+        <section id="home-page" class="page">
+            <div class="relative rounded-2xl overflow-hidden mb-12 shadow-lg">
+                <img src="https://res.cloudinary.com/dsrczav6p/image/upload/v1759561018/employees-use-laptop-work-desk_36897-326_fijgtk.jpg" class="w-full h-48 md:h-72 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center p-4">
+                    <h2 class="text-white text-2xl md:text-4xl font-bold mb-4">Claim and approve expenses from anywhere with the Webexpenses mobile expense manager app</h2>
+                    <button class="px-8 py-3 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition-colors">Book now</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Employee Dashboard Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-2 border-blue-200 cursor-pointer hover:shadow-xl transition-shadow" data-page="employee-dashboard">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 border-b pb-2">Employee Dashboard</h3>
+                    <div class="space-y-4">
+                        <input type="text" placeholder="Amount" class="w-full p-2 bg-gray-100 rounded-md border">
+                        <input type="text" placeholder="Purpose" class="w-full p-2 bg-gray-100 rounded-md border">
+                        <button class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Submit</button>
+                        <p class="text-gray-600 pt-2 border-t">Expenses History</p>
+                    </div>
+                </div>
+
+                <!-- Manager Dashboard Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-2 border-blue-200 cursor-pointer hover:shadow-xl transition-shadow" data-page="manager-dashboard">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 border-b pb-2">Manager Dashboard</h3>
+                    <div class="space-y-4">
+                        <p class="font-semibold">Pending Approvals</p>
+                        <textarea placeholder="Feedback Comments" rows="3" class="w-full p-2 bg-gray-100 rounded-md border"></textarea>
+                        <div class="flex gap-4">
+                            <button class="flex-1 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Approve</button>
+                            <button class="flex-1 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">Reject</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Dashboard Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-2 border-blue-200 cursor-pointer hover:shadow-xl transition-shadow" data-page="admin-dashboard">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 border-b pb-2">Admin Dashboard</h3>
+                    <ul class="space-y-2 text-gray-700 list-inside">
+                        <li class="border-b py-2">Manage users</li>
+                        <li class="border-b py-2">View All Expense</li>
+                        <li class="border-b py-2">Configure Approval Rules</li>
+                        <li class="border-b py-2">Over Ride Approval</li>
+                        <li class="py-2 text-blue-600 hover:underline">See more</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Page -->
+        <section id="about-page" class="page max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-6">About Us</h2>
+            <p class="text-gray-600 leading-relaxed mb-8">
+                At WebExpens, we simplify the way teams manage expenses. Our platform is designed to streamline tracking, approvals, and reimbursements—making financial workflows faster, smarter, and more transparent. Whether you’re a freelancer, startup, or enterprise, we help you stay in control of your spending with intuitive dashboards, real-time insights, and secure cloud-based storage. Built with precision and empathy, WebExpens empowers organizations to focus less on paperwork and more on progress.
+            </p>
+            <div class="border-t border-gray-300 pt-6">
+                 <p class="text-xl font-semibold text-blue-900">&copy; Claimchain industries co.pvt.Ltd</p>
+            </div>
+        </section>
+
+        <!-- Contact Us Page -->
+        <section id="contact-page" class="page">
+             <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">Contact Us</h2>
+             <div class="grid md:grid-cols-2 gap-10 items-center max-w-5xl mx-auto">
+                <div class="hidden md:block">
+                    <img src="https://res.cloudinary.com/dsrczav6p/image/upload/v1759572561/643457_deseia.jpg" class="rounded-2xl shadow-xl w-full h-auto object-cover">
+                </div>
+                 <div class="w-full flex flex-col justify-center">
+                    <form class="space-y-6 mb-8">
+                         <div>
+                             <label for="contactName" class="text-sm font-medium text-gray-700">Full Name</label>
+                             <input type="text" id="contactName" class="mt-1 w-full border-b-2 border-gray-300 focus:outline-none focus:border-purple-500 py-2 bg-transparent">
+                         </div>
+                         <div>
+                             <label for="contactEmail" class="text-sm font-medium text-gray-700">E-mail</label>
+                             <input type="email" id="contactEmail" class="mt-1 w-full border-b-2 border-gray-300 focus:outline-none focus:border-purple-500 py-2 bg-transparent">
+                         </div>
+                         <div>
+                             <label for="message" class="text-sm font-medium text-gray-700">Message</label>
+                             <textarea id="message" rows="3" class="mt-1 w-full border-b-2 border-gray-300 focus:outline-none focus:border-purple-500 py-2 bg-transparent"></textarea>
+                         </div>
+                         <button type="button" class="w-full bg-blue-800 text-white font-bold py-3 px-4 rounded-full hover:bg-blue-900 transition-colors text-lg">Contact Us</button>
+                    </form>
+                    <div class="text-gray-700">
+                        <p><span class="font-bold">Contact:</span> claimchain@gmail.com</p>
+                        <p><span class="font-bold">Based in:</span> Ahemdabad, Gujarat, India</p>
+                        <div class="flex space-x-4 mt-4">
+                           <i class="ph-facebook-logo text-3xl text-blue-800 cursor-pointer"></i>
+                           <i class="ph-instagram-logo text-3xl text-pink-600 cursor-pointer"></i>
+                           <i class="ph-twitter-logo text-3xl text-blue-500 cursor-pointer"></i>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Support Page -->
+        <section id="support-page" class="page max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-gray-800 text-center mb-4">Support</h2>
+            <h3 class="text-2xl text-gray-600 text-center mb-8">How can we help you?</h3>
+            <div class="relative mb-12">
+                <input type="text" placeholder="Ask What do you want?" class="w-full py-4 px-6 text-lg bg-gray-100 rounded-full border-2 border-transparent focus:outline-none focus:border-purple-400 focus:ring-0">
+                <i class="ph-magnifying-glass absolute right-6 top-1/2 -translate-y-1/2 text-2xl text-gray-400"></i>
+            </div>
+            <div>
+                <h4 class="text-2xl font-bold text-gray-800 mb-4">Terms & conditions :</h4>
+                <div class="space-y-2 text-gray-600 text-sm">
+                    <p>Expense management page terms and conditions are a set of rules and agreements that govern the use of a specific expense management platform, outlining responsibilities for users, the platform provider, data privacy, service limitations, and consequences of violating terms. Key aspects of Terms and Conditions: User Account and Registration: Requirements for creating an account, such as using a Google or Apple account for certain features.</p>
+                    <p>Responsibilities for maintaining account security, including user IDs, passwords, and other sign-on mechanisms. User Responsibilities & Conduct: Prohibitions on uploading illegal or harmful content, such as content that defames, harasses, or is obscene. Adherence to company policies, Income Tax rules, and usage limits set by the provider.</p>
+                    <p>Data Privacy & Security: How user data, including personal information and transaction data, is collected, stored, and used. Provisions for data confidentiality and protection of customer data.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Employee's Dashboard -->
+        <section id="employee-dashboard" class="page">
+             <div class="flex flex-col md:flex-row gap-8 bg-white p-4 sm:p-6 rounded-2xl shadow-lg">
+                <!-- Sidebar -->
+                <aside class="flex flex-row md:flex-col items-center gap-4 md:gap-6 bg-gray-100 p-4 rounded-2xl">
+                    <div class="p-3 bg-yellow-200 rounded-full cursor-pointer sidebar-icon"><i class="ph-medal text-2xl text-yellow-600"></i></div>
+                    <div class="p-3 bg-orange-200 rounded-full cursor-pointer sidebar-icon"><i class="ph-house text-2xl text-orange-600"></i></div>
+                    <div class="p-3 bg-cyan-200 rounded-full cursor-pointer sidebar-icon"><span class="font-bold text-cyan-700 text-lg">43</span></div>
+                     <div class="mt-auto p-3 bg-red-200 rounded-full cursor-pointer sidebar-icon"><i class="ph-user text-2xl text-red-600"></i></div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="flex-1">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Employee's / View</h2>
+                    <!-- Stats -->
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-yellow-50 p-6 rounded-2xl shadow flex items-center gap-4">
+                            <div class="p-3 bg-yellow-200 rounded-full"><span class="font-bold text-yellow-700 text-xl">O</span></div>
+                            <div>
+                                <p class="text-gray-500">Titled Amount</p>
+                                <p class="text-2xl font-bold text-gray-800">52,141 rs</p>
+                            </div>
+                        </div>
+                        <div class="bg-cyan-50 p-6 rounded-2xl shadow flex items-center gap-4">
+                             <div class="p-3 bg-cyan-200 rounded-full"><span class="font-bold text-cyan-700 text-xl">O</span></div>
+                            <div>
+                                <p class="text-gray-500">Weising Approval</p>
+                                <p class="text-2xl font-bold text-gray-800">33,756 rs</p>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-6 rounded-2xl shadow">
+                            <p class="text-gray-500">Redo Quered Amount</p>
+                            <p class="text-2xl font-bold text-gray-800">500 rs</p>
+                        </div>
+                    </div>
+                    <!-- Upload -->
+                    <div class="bg-gray-50 p-6 rounded-2xl mb-8 grid md:grid-cols-2 gap-6 items-center">
+                        <div class="flex items-center gap-4">
+                           <div class="p-4 bg-purple-200 rounded-lg"><i class="ph-chart-line-up text-3xl text-purple-700"></i></div>
+                           <div>
+                                <h3 class="font-bold text-lg">Upload Receipt</h3>
+                                <p class="text-gray-500 text-sm">Upload a receipt from your computer or test a photo at the lose</p>
+                           </div>
+                        </div>
+                        <div>
+                             <h3 class="font-bold text-lg">Upload Receipt</h3>
+                             <p class="text-gray-500 text-sm mb-2">Upload a receipt from your computer or test a photo at the lose</p>
+                             <button class="w-full sm:w-auto px-6 py-2 btn-secondary rounded-lg font-semibold hover:bg-cyan-200">Submit Expenses</button>
+                        </div>
+                    </div>
+                    <!-- Expenses Table -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Expenses</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-purple-100 text-purple-800">
+                                    <tr>
+                                        <th class="p-3 rounded-l-lg">Empoyes</th>
+                                        <th class="p-3">Description</th>
+                                        <th class="p-3">Exit</th>
+                                        <th class="p-3">Category</th>
+                                        <th class="p-3">Park By</th>
+                                        <th class="p-3">Remains</th>
+                                        <th class="p-3 rounded-r-lg">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white border-b">
+                                        <td class="p-3 font-semibold">Max</td>
+                                        <td class="p-3">Restaurant 5J</td>
+                                        <td class="p-3">1st Oct 2025</td>
+                                        <td class="p-3">Food</td>
+                                        <td class="p-3">Max</td>
+                                        <td class="p-3">None</td>
+                                        <td class="p-3"><span class="bg-cyan-100 text-cyan-800 font-semibold px-3 py-1 rounded-full">Slaumnned</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <!-- Manager's Dashboard -->
+        <section id="manager-dashboard" class="page">
+             <div class="flex flex-col md:flex-row gap-8 bg-white p-4 sm:p-6 rounded-2xl shadow-lg">
+                <!-- Sidebar -->
+                <aside class="flex flex-row md:flex-col items-center gap-4 md:gap-6 bg-gray-100 p-4 rounded-2xl">
+                    <div class="p-3 bg-gray-300 rounded-full cursor-pointer sidebar-icon"><i class="ph-medal text-2xl text-gray-700"></i></div>
+                    <div class="p-3 bg-orange-200 rounded-full cursor-pointer sidebar-icon"><i class="ph-house text-2xl text-orange-600"></i></div>
+                    <div class="p-3 bg-green-200 rounded-full cursor-pointer sidebar-icon"><i class="ph-check text-2xl text-green-600"></i></div>
+                    <div class="mt-auto p-3 bg-red-200 rounded-full cursor-pointer sidebar-icon"><i class="ph-user text-2xl text-red-600"></i></div>
+                </aside>
+                <!-- Main Content -->
+                <div class="flex-1">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Manager's View</h2>
+                    <div class="bg-gray-50 p-6 rounded-2xl mb-8">
+                        <h3 class="font-bold text-xl mb-4">Approvals to review</h3>
+                        <div class="border border-dashed border-gray-400 p-6 rounded-lg flex items-center gap-6">
+                            <div class="p-4 bg-gray-800 rounded-lg"><i class="ph-chart-line-up text-3xl text-white"></i></div>
+                            <div>
+                                <p class="font-semibold">Approvals 10 reviews</p>
+                                <p class="text-gray-500 text-sm">Upload a rescipt from your computers</p>
+                            </div>
+                        </div>
+                        <button class="w-full sm:w-auto mt-4 px-8 py-3 bg-purple-700 text-white rounded-lg font-semibold hover:bg-purple-800">Submit Exponse</button>
+                    </div>
+                     <!-- Approvals Table -->
+                    <div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-purple-100 text-purple-800">
+                                    <tr>
+                                        <th class="p-3 rounded-l-lg">Approval subject</th>
+                                        <th class="p-3">Request Owner</th>
+                                        <th class="p-3">Catagory</th>
+                                        <th class="p-3">Paid by</th>
+                                        <th class="p-3">Remains</th>
+                                        <th class="p-3 rounded-r-lg">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white border-b">
+                                        <td class="p-3 font-semibold">Sarah</td>
+                                        <td class="p-3">Food</td>
+                                        <td class="p-3">Food</td>
+                                        <td class="p-3">Sarah</td>
+                                        <td class="p-3">None</td>
+                                        <td class="p-3"><button class="bg-cyan-100 text-cyan-800 font-semibold px-4 py-1 rounded-full hover:bg-cyan-200">Approvest</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <!-- Admin's Dashboard -->
+        <section id="admin-dashboard" class="page">
+             <div class="flex flex-col md:flex-row gap-8 bg-gray-50 p-4 sm:p-6 rounded-2xl shadow-lg">
+                <!-- Sidebar -->
+                 <aside class="flex flex-row md:flex-col items-center gap-4 md:gap-6 bg-white p-4 rounded-2xl shadow-md">
+                    <div class="p-3 bg-yellow-200 rounded-full cursor-pointer sidebar-icon"><i class="ph-medal text-2xl text-yellow-600"></i></div>
+                    <div class="p-3 bg-orange-200 rounded-full cursor-pointer sidebar-icon"><i class="ph-house text-2xl text-orange-600"></i></div>
+                    <div class="p-3 bg-cyan-200 rounded-full cursor-pointer sidebar-icon"><span class="font-bold text-cyan-700 text-lg">43</span></div>
+                    <div class="p-3 bg-green-200 rounded-full cursor-pointer sidebar-icon"><i class="ph-check-circle text-2xl text-green-600"></i></div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="flex-1">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Admin's View</h2>
+                    <!-- Stats -->
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-2xl shadow flex items-center gap-4">
+                            <div class="p-4 bg-gray-200 rounded-full"><i class="ph-users text-2xl text-gray-600"></i></div>
+                            <div>
+                                <p class="text-gray-500">Total users</p>
+                                <p class="text-3xl font-bold text-gray-800">1679</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow flex items-center gap-4">
+                            <div class="p-4 bg-gray-200 rounded-full"><i class="ph-file-text text-2xl text-gray-600"></i></div>
+                            <div>
+                                <p class="text-gray-500">Approval's to review</p>
+                                <p class="text-3xl font-bold text-gray-800">34</p>
+                            </div>
+                        </div>
+                         <div class="bg-white p-6 rounded-2xl shadow flex items-center gap-4">
+                            <div class="p-4 bg-gray-200 rounded-full"><i class="ph-user-list text-2xl text-gray-600"></i></div>
+                            <div>
+                                <p class="text-gray-500">Total Enproveys</p>
+                                <p class="text-3xl font-bold text-gray-800">$255,467</p>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Manage Users & Approvals -->
+                    <div class="grid lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-1 space-y-6">
+                            <div class="bg-white p-6 rounded-2xl shadow text-center">
+                                <div class="mx-auto w-20 h-20 bg-purple-200 rounded-lg flex items-center justify-center mb-4">
+                                    <i class="ph-arrow-clockwise text-4xl text-purple-700"></i>
+                                </div>
+                                <p class="font-bold text-lg">$4 approvals in queue</p>
+                                <p class="text-sm text-gray-500 mb-4">Upload with the feedbak</p>
+                                <button class="w-full bg-cyan-400 text-white font-bold py-3 rounded-lg hover:bg-cyan-500">SUBMIT HERE</button>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl shadow">
+                                <h3 class="font-bold text-xl">Manage User</h3>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow">
+                            <h3 class="font-bold text-xl mb-4">Manage users</h3>
+                             <div class="overflow-x-auto">
+                                <table class="w-full text-left">
+                                    <thead class="bg-purple-100 text-purple-800">
+                                        <tr>
+                                            <th class="p-3 rounded-l-lg">Aware</th>
+                                            <th class="p-3">Name</th>
+                                            <th class="p-3">Email</th>
+                                            <th class="p-3">Vible 1</th>
+                                            <th class="p-3 rounded-r-lg">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b"><td class="p-3"><img src="https://placehold.co/32x32/FFC0CB/000000?text=S" class="rounded-full"></td><td class="p-3 font-semibold">Serah</td><td class="p-3">****</td><td class="p-3">Verified</td><td class="p-3"><button class="bg-cyan-100 text-cyan-800 px-4 py-1 rounded-full font-semibold">Approve</button></td></tr>
+                                        <tr class="border-b"><td class="p-3"><img src="https://placehold.co/32x32/ADD8E6/000000?text=A" class="rounded-full"></td><td class="p-3 font-semibold">Aones</td><td class="p-3">****</td><td class="p-3">Verified</td><td class="p-3"><button class="bg-cyan-100 text-cyan-800 px-4 py-1 rounded-full font-semibold">Approve</button></td></tr>
+                                        <tr class="border-b"><td class="p-3"><img src="https://placehold.co/32x32/90EE90/000000?text=K" class="rounded-full"></td><td class="p-3 font-semibold">KimJung</td><td class="p-3">****</td><td class="p-3">Verified</td><td class="p-3"><button class="bg-cyan-100 text-cyan-800 px-4 py-1 rounded-full font-semibold">Approve</button></td></tr>
+                                        <tr><td class="p-3"><img src="https://placehold.co/32x32/FFD700/000000?text=E" class="rounded-full"></td><td class="p-3 font-semibold">Ethan</td><td class="p-3">****</td><td class="p-3">Verified</td><td class="p-3"><button class="bg-cyan-100 text-cyan-800 px-4 py-1 rounded-full font-semibold">Approve</button></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="flex justify-end items-center mt-4 space-x-2 text-gray-500">
+                                <i class="ph-caret-left cursor-pointer"></i>
+                                <span>1</span>
+                                <i class="ph-caret-right cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('[data-page]');
+            const authHeader = document.getElementById('auth-header');
+            const mainHeader = document.getElementById('main-header');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+
+            function showPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+
+                // Show the target page
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+                
+                // Toggle headers
+                if (pageId === 'login-page' || pageId === 'signup-page') {
+                    authHeader.style.display = 'block';
+                    mainHeader.style.display = 'none';
+                } else {
+                    authHeader.style.display = 'none';
+                    mainHeader.style.display = 'block';
+                }
+
+                // Close mobile menu on navigation
+                mobileMenu.classList.add('hidden');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const pageId = this.dataset.page;
+                    if(pageId) {
+                        showPage(pageId);
+                    }
+                });
+            });
+
+            // Also add event listeners to dashboard cards
+            const dashboardCards = document.querySelectorAll('[data-page="employee-dashboard"], [data-page="manager-dashboard"], [data-page="admin-dashboard"]');
+            dashboardCards.forEach(card => {
+                 card.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const pageId = this.dataset.page;
+                    if(pageId) {
+                        showPage(pageId);
+                    }
+                });
+            });
+
+
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+
+            // Initial page load
+            showPage('login-page');
+        });
+    </script>
+</body>
+</html>
